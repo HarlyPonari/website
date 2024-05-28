@@ -1,0 +1,32 @@
+.tile {
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  width: var(--size);
+  height: var(--size);
+  outline: 1px solid rgb(52, 52, 52);
+}
+
+.tile:hover:before {
+  background-color: rgb(30, 30, 30);
+}
+
+.tile:before {
+  background-color: rgb(15, 15, 15);
+  content: "";
+  inset: 0.5px;
+  position: absolute;
+}
+
+#tiles {
+  position: relative;
+  z-index: 2;
+
+  height: calc(100vh - 1px);
+  width: calc(100vw - 1px);
+
+  display: grid;
+  overflow: hidden;
+  grid-template-columns: repeat(var(--columns), 1fr);
+  grid-template-rows: repeat(var(--rows), 1fr);
+}
