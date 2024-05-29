@@ -3,7 +3,7 @@ import "./App.css";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-import Grid from "./components/Grid";
+import Grid from "./components/PrettyGrid";
 import { Typography, Box } from "@mui/material";
 
 const theme = createTheme({
@@ -21,6 +21,7 @@ const theme = createTheme({
 });
 
 function App() {
+
   return (
     <div className="App">
       <ThemeProvider theme={theme}>

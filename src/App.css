@@ -1,3 +1,16 @@
 .App {
-  text-align: center;
+  height: 100vh;
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+  margin: 0px;
+  animation: background-pan 10s linear infinite;
+  background: linear-gradient(
+    to right,
+    var(--g1),
+    var(--g2),
+    var(--g1)
+  );
 }

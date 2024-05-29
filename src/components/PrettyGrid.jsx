@@ -4,9 +4,9 @@ import React, { useEffect, useRef, useState } from "react";
 import "../styles/grid.css";
 import anime from "animejs";
 
-import MatrixRain from "../components/MatrixRain";
+import MatrixRain from "./MatrixRain";
 
-function Grid() {
+function PrettyGrid() {
   const wrapper = useRef(null);
   let cols = 0,
     rows = 0,
@@ -34,11 +34,10 @@ function Grid() {
     };
 
     const onClick = (index) => {
-      count = count + 1;
+      toggle();
 
       anime({
         targets: ".tile",
-        backGroundColor: colors[count % (colors.length - 1)],
         opacity: toggled ? 0 : 1,
         delay: anime.stagger(50, {
           grid: [cols, rows],
@@ -47,38 +46,40 @@ function Grid() {
       });
     };
 
-    const createTile = (index) => {
+    const createTile = (index, size) => {
       const tile = document.createElement("div");
 
       tile.classList.add("tile");
 
       tile.style.opacity = toggled ? 0 : 1;
 
-      tile.style.setProperty("--size", "100px")
+      tile.style.setProperty("--size", size + "px");
 
       tile.addEventListener("click", (e) => onClick(index));
       return tile;
     };
 
-    const createTiles = (quantity) => {
+    const createTiles = (quantity, size) => {
       Array.from(Array(quantity)).map((_, index) => {
-        wrapper.current.appendChild(createTile(index));
+        wrapper.current.appendChild(createTile(index, size));
       });
     };
 
     const createGrid = () => {
       wrapper.current.innerHTML = "";
 
-      let size = document.body.clientWidth > 800 ? 100 : 50;
+      const size = document.body.clientWidth > 800 ? 100 : 50;
 
+      console.log(document.body.clientWidth, document.body.clientHeight);
+      cols = Math.floor(document.body.clientWidth / size);
+      rows = Math.floor(document.body.clientHeight / size);
 
-      cols = Math.floor(window.innerWidth / size);
-      rows = Math.floor(window.innerHeight / size);
+      console.log("cols", cols, "rows", rows)
 
       wrapper.current.style.setProperty("--cols", cols);
       wrapper.current.style.setProperty("--rows", rows);
 
-      createTiles(rows * cols);
+      createTiles(rows * cols, size);
     };
 
     createGrid();
@@ -86,11 +87,7 @@ function Grid() {
     window.onresize = () => createGrid();
   }, [colors]);
 
-  return (
-    <div>
-      <div ref={wrapper} className="tiles" />
-    </div>
-  );
+  return <div ref={wrapper} id="tiles" />;
 }
 
-export default Grid;
+export default PrettyGrid;
