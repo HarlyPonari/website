@@ -1,27 +1,10 @@
-import { Box, Typography } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 
 import "../styles/grid.css";
 import anime from "animejs";
 
-import MatrixRain from "./MatrixRain";
-
 function PrettyGrid() {
   const wrapper = useRef(null);
-  let cols = 0,
-    rows = 0,
-    toggled = false;
-
-  const colors = [
-    "rgb(229, 57, 53)",
-    "rgb(255, 87, 34)",
-    "rgb(255, 152, 0)",
-    "rgb(255, 193, 7)",
-    "rgb(205, 220, 57)",
-    "rgb(139, 195, 74)",
-  ];
-
-  let count = -1;
 
   useEffect(() => {
     let cols = 0,
@@ -30,7 +13,13 @@ function PrettyGrid() {
 
     const toggle = () => {
       toggled = !toggled;
-      //Do sum
+      
+      //Make the background color appear and disappear
+      anime({
+        targets: "#tiles",
+        backgroundColor: toggled ? "rgba(0,0,0, 0.0)" : "rgba(0,0,0, 0.9)",
+        duration: 3000,
+      });
     };
 
     const onClick = (index) => {
@@ -53,8 +42,6 @@ function PrettyGrid() {
 
       tile.style.opacity = toggled ? 0 : 1;
 
-      tile.style.setProperty("--size", size + "px");
-
       tile.addEventListener("click", (e) => onClick(index));
       return tile;
     };
@@ -70,11 +57,12 @@ function PrettyGrid() {
 
       const size = document.body.clientWidth > 800 ? 100 : 50;
 
-      console.log(document.body.clientWidth, document.body.clientHeight);
+      // console.log(document.body.clientWidth, document.body.clientHeight);
+
       cols = Math.floor(document.body.clientWidth / size);
       rows = Math.floor(document.body.clientHeight / size);
 
-      console.log("cols", cols, "rows", rows)
+      // console.log("cols", cols, "rows", rows);
 
       wrapper.current.style.setProperty("--cols", cols);
       wrapper.current.style.setProperty("--rows", rows);
@@ -85,9 +73,11 @@ function PrettyGrid() {
     createGrid();
 
     window.onresize = () => createGrid();
-  }, [colors]);
+  }, []);
 
-  return <div ref={wrapper} id="tiles" />;
+  return (
+  <div ref={wrapper} id="tiles" />
+);
 }
 
 export default PrettyGrid;

@@ -1,32 +1,29 @@
 .tile {
   cursor: pointer;
   position: relative;
-  width: var(--size);
-  height: var(--size);
-  outline: 1px solid rgb(52, 52, 52);
 }
 
 .tile:hover:before {
-  background-color: rgb(30, 30, 30);
+  background-color: rgb(88, 88, 88);
 }
 
 .tile:before {
-  background-color: rgb(15, 15, 15);
+  background-color: #2C3624;
   content: "";
-  inset: 0.5px;
   position: absolute;
+  inset: 0.5px;
 }
 
 #tiles {
-  height: 100vh;
-  width: 100vw;
+  padding: 3px;
+  top: 0;
+  left: 0;
+  height: calc(100vh - 1px);
+  width: calc(100vw - 1px);
   position: relative;
   z-index: 2;
 
   display: grid;
   grid-template-columns: repeat(var(--cols), 1fr);
   grid-template-rows: repeat(var(--rows), 1fr);
-  
-  justify-content: center;
-  align-items: center;
 }

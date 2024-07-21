@@ -1,16 +1,12 @@
-.App {
-  height: 100vh;
+
+:root {
+  --dark: rgb(10, 27, 3);
+  --term: rgb(56, 183, 30);
 }
 
-body {
+.App {
   height: 100vh;
   overflow: hidden;
   margin: 0px;
   animation: background-pan 10s linear infinite;
-  background: linear-gradient(
-    to right,
-    var(--g1),
-    var(--g2),
-    var(--g1)
-  );
 }

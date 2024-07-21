@@ -1,10 +1,10 @@
-import logo from "./logo.svg";
-import "./App.css";
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import HomePage from "./components/HomePage";
 
-import Grid from "./components/PrettyGrid";
-import { Typography, Box } from "@mui/material";
+import "./App.css";
 
 const theme = createTheme({
   palette: {
@@ -21,12 +21,13 @@ const theme = createTheme({
 });
 
 function App() {
-
   return (
     <div className="App">
-      <ThemeProvider theme={theme}>
-        <Grid />
-      </ThemeProvider>
+      <BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <HomePage />
+        </ThemeProvider>
+      </BrowserRouter>
     </div>
   );
 }
